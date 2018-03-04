@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: root
+    password: K4llil01
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/stream 
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.Oracle10gDialect
+#    jpa:
+#      show-sql: true
+#      hibernate:
+#        ddl-auto: create-drop
+#      properties:
+#        hibernate.dialect: org.hibernate.dialect.MySQLDialect
