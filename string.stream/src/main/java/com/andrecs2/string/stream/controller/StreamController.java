@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.andrecs2.string.stream.bean.Retorno;
 import com.andrecs2.string.stream.cotroller.StreamService;
+import com.andrecs2.string.stream.model.Stream;
 
 @RestController
 @RequestMapping
@@ -20,8 +21,14 @@ public class StreamController {
 
 	@ResponseBody
 	@RequestMapping(value = "/stream/{stream}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Retorno stream(@PathVariable(value="stream") String stream) {
+	public Retorno stream(@PathVariable(value = "stream") String stream) {
 		return streamService.find(stream, System.currentTimeMillis());
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/stream", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Iterable<Stream> stream() {
+		return streamService.findAll();
 	}
 
 }
