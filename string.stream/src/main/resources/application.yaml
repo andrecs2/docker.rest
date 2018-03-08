@@ -11,3 +11,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  http:
+    encoding: 
+      enabled: false
+info:
+  app:
+    name: Stream String find vowel Application
+    description: This application is prepared to find a first vowel after a vowel and a consonant
+    version: 1.0.0

@@ -1,4 +1,4 @@
-package com.andrecs2.string.stream.cotroller;
+package com.andrecs2.string.stream.service;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -22,7 +22,7 @@ public class StreamService {
 	public Retorno find(String stream, long inicio) {
 
 		String vogal = obterVogalSolitaria(stream);
-		String tempoTotal = ((System.currentTimeMillis() - inicio) / 1000) + " ms";
+		String tempoTotal = ((System.currentTimeMillis() - inicio) ) + " ms";
 		Stream obj = new Stream.Builder().tempoTotal(tempoTotal).stream(stream).vogal(vogal).build();
 		repository.save(obj);
 		return new Retorno.Builder(obj).build();

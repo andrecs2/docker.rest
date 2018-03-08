@@ -9,8 +9,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.andrecs2.string.stream.cotroller.StreamService;
 import com.andrecs2.string.stream.repository.StreamRepository;
+import com.andrecs2.string.stream.service.StreamService;
 
 @RunWith(SpringRunner.class)
 public class StreamServiceTest {
@@ -22,7 +22,7 @@ public class StreamServiceTest {
 	private StreamRepository repository;
 
 	@TestConfiguration
-	static class EmployeeServiceImplTestContextConfiguration {
+	static class StreamServiceTestContextConfiguration {
 
 		@Bean
 		public StreamService streamService() {

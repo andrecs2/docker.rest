@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.andrecs2.string.stream.bean.Retorno;
-import com.andrecs2.string.stream.cotroller.StreamService;
 import com.andrecs2.string.stream.model.Stream;
+import com.andrecs2.string.stream.service.StreamService;
 
 @RestController
 @RequestMapping
