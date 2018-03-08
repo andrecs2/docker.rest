@@ -1,0 +1,28 @@
+
+services:
+        db:
+                image: mariadb
+                environment:
+                      MYSQL_ROOT_PASSWORD: K4llil01
+                      MYSQL_DATABASE: stream 
+                links:
+                        - db:db_host
+        nginx:
+                image: nginx
+                volumes:
+                      - ./site.template:/etc/nginx/conf.d/site.template
+                      - ../string.stream/target/string.stream-0.0.1-SNAPSHOT.jar:/var/www/download/
+                links:
+                      - java:java_host 
+                ports:
+                      - "8080:80"
+                environment:
+                         - NGINX_HOST=foobar.com
+                         - NGINX_PORT=80
+                command: /bin/bash -c "envsubst < /etc/nginx/conf.d/site.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+        java:
+                image: jdk
+                links:
+                        - db:db_host
+                        - nginx:file_host
+
