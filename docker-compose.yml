@@ -1,10 +1,25 @@
 version: '2'
+networks:
+    spring-cloud-network:
+        driver: bridge
 services:
+    mysql:
+        image: mysql:latest
+        ports: 
+              - 3306:3306
+        environment:
+             - MYSQL_DATABASE=stream
+             - MYSQL_ROOT_PASSWORD=stream
+             - MYSQL_ROOT_HOST=% 
+             - MYSQL_USER=stream
+             - MYSQL_PASSWORD=stream
+        networks:
+            - spring-cloud-network
     config-server:
         container_name: config-server
         build:
             context: .
-            dockerfile: Dockerfile.server
+            dockerfile: Dockerfile
         image: config-server:latest
         expose:
             - 8000
@@ -14,32 +29,13 @@ services:
             - spring-cloud-config-repo:/var/lib/spring-cloud/config-repo
         logging:
             driver: json-file
-    config-client:
-        container_name: config-client
-        build:
-            context: .
-            dockerfile: Dockerfile.client
-        image: config-client:latest
-        entrypoint: /opt/spring-cloud/bin/config-client-entrypoint.sh
-        environment:
-            SPRING_APPLICATION_JSON: \
-              '{"spring": {"cloud":  \
-              {"config": {"uri": "http://config-server:8888"}}}}'
-        expose:
-            - 8080
-        ports:
-            - 8080:8080
+        depends_on:
+            - "mysql"
+#        command: ["./entrypoint.sh"]
+        links: 
+            - mysql:mysql
         networks:
             - spring-cloud-network
-        links:
-            - config-server:config-server
-        depends_on:
-            - config-server
-        logging:
-            driver: json-file
-networks:
-    spring-cloud-network:
-        driver: bridge
 volumes:
     spring-cloud-config-repo:
         external: true
